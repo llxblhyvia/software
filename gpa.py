@@ -10,110 +10,104 @@ from tkinter import *
 def makeitbyyourself():
     by =0.238
     
-    mibycurrgpa = currgpa
-    mibycurrscore = currscore
-    mibyleftterms = leftterms
+    #entry 0.06
+    xueqijihuaxiuxi0 = Label(root,text = '''大一上学期已经修习''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
+    xueqijihuaxiuxi0.place(relx = 0.11,rely = by)
+    #label 一个字 0.0166
+    termscore0 = Entry(root,width = 7)
+    termscore0.place(relx = 0.25,rely = by)
     
+    zitermscore0 = Label(root,text = '''学分，GPA为：''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
+    zitermscore0.place(relx = 0.31,rely = by)
     
-    ps1 = Label(root,text = '''填写示例:大二上''',font = ('微软雅黑',9),relief =FLAT)
-    ps1.place(relx = 0.08,rely = by-0.04)
+    termgpa0 = Entry(root,width = 7)
+    termgpa0.place(relx = 0.41,rely = by)
     
-    daji1 = Entry(root,width = 7)
-    daji1.place(relx = 0.1,rely = by)
+    by +=0.04
     
     #entry 0.06
-    xueqijihuaxiuxi1 = Label(root,text = '''学期计划修习''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
-    xueqijihuaxiuxi1.place(relx = 0.15,rely = by)
+    xueqijihuaxiuxi1 = Label(root,text = '''大一下学期已经/计划修习''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
+    xueqijihuaxiuxi1.place(relx = 0.11,rely = by)
     #label 一个字 0.0166
     termscore1 = Entry(root,width = 7)
-    termscore1.place(relx = 0.25,rely = by)
+    termscore1.place(relx = 0.275,rely = by)
     
-    zitermscore1 = Label(root,text = '''学分，GPA计划达到''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
+    zitermscore1 = Label(root,text = '''学分，GPA已经/计划达到''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
     zitermscore1.place(relx = 0.31,rely = by)
     
     termgpa1 = Entry(root,width = 7)
-    termgpa1.place(relx = 0.44,rely = by)
+    termgpa1.place(relx = 0.475,rely = by)
     
-    ps2 = Label(root,text = '''请还剩几学期就填写几学期的计划''',font = ('微软雅黑',9),relief =FLAT)
-    ps2.place(relx = 0.5,rely = by)
+    ps = Label(root,text = '''请还剩哪几学期就填写哪几学期的计划''',font = ('微软雅黑',9),relief =FLAT)
+    ps.place(relx = 0.53,rely = by)
      
     by +=0.04
-    
-    daji2 = Entry(root,width = 7)
-    daji2.place(relx = 0.1,rely = by)
-    
+
     #entry 0.06
-    xueqijihuaxiuxi2 = Label(root,text = '''学期计划修习''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
-    xueqijihuaxiuxi2.place(relx = 0.15,rely = by)
+    xueqijihuaxiuxi2 = Label(root,text = '''大二上学期已经/计划修习''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
+    xueqijihuaxiuxi2.place(relx = 0.11,rely = by)
     #label 一个字 0.0166
     termscore2 = Entry(root,width = 7)
-    termscore2.place(relx = 0.25,rely = by)
+    termscore2.place(relx = 0.275,rely = by)
     
-    zitermscore2 = Label(root,text = '''学分，GPA计划达到''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
+    zitermscore2 = Label(root,text = '''学分，GPA已经/计划达到''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
     zitermscore2.place(relx = 0.31,rely = by)
     
     termgpa2 = Entry(root,width = 7)
-    termgpa2.place(relx = 0.44,rely = by)
+    termgpa2.place(relx = 0.475,rely = by)
     
     by +=0.04
     
-    daji3 = Entry(root,width = 7)
-    daji3.place(relx = 0.1,rely = by)
-    
     #entry 0.06
-    xueqijihuaxiuxi3 = Label(root,text = '''学期计划修习''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
-    xueqijihuaxiuxi3.place(relx = 0.15,rely = by)
+    xueqijihuaxiuxi3 = Label(root,text = '''大二下学期已经/计划修习''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
+    xueqijihuaxiuxi3.place(relx = 0.11,rely = by)
     #label 一个字 0.0166
     termscore3 = Entry(root,width = 7)
-    termscore3.place(relx = 0.25,rely = by)
+    termscore3.place(relx = 0.275,rely = by)
     
-    zitermscore3 = Label(root,text = '''学分，GPA计划达到''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
+    zitermscore3 = Label(root,text = '''学分，GPA已经/计划达到''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
     zitermscore3.place(relx = 0.31,rely = by)
     
     termgpa3 = Entry(root,width = 7)
-    termgpa3.place(relx = 0.44,rely = by)
+    termgpa3.place(relx = 0.475,rely = by)
      
     by +=0.04
-    
-    daji4 = Entry(root,width = 7)
-    daji4.place(relx = 0.1,rely = by)
-    
+
     #entry 0.06
-    xueqijihuaxiuxi4 = Label(root,text = '''学期计划修习''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
-    xueqijihuaxiuxi4.place(relx = 0.15,rely = by)
+    xueqijihuaxiuxi4 = Label(root,text = '''大三上学期已经/计划修习''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
+    xueqijihuaxiuxi4.place(relx = 0.11,rely = by)
     #label 一个字 0.0166
     termscore4 = Entry(root,width = 7)
-    termscore4.place(relx = 0.25,rely = by)
+    termscore4.place(relx = 0.275,rely = by)
     
-    zitermscore4 = Label(root,text = '''学分，GPA计划达到''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
+    zitermscore4 = Label(root,text = '''学分，GPA已经/计划达到''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
     zitermscore4.place(relx = 0.31,rely = by)
     
     termgpa4 = Entry(root,width = 7)
-    termgpa4.place(relx = 0.44,rely = by)
+    termgpa4.place(relx = 0.475,rely = by)
     
     by +=0.04
     
-    daji5 = Entry(root,width = 7)
-    daji5.place(relx = 0.1,rely = by)
-    
     #entry 0.06
-    xueqijihuaxiuxi5 = Label(root,text = '''学期计划修习''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
-    xueqijihuaxiuxi5.place(relx = 0.15,rely = by)
+    xueqijihuaxiuxi5 = Label(root,text = '''大三下学期计划修习''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
+    xueqijihuaxiuxi5.place(relx = 0.11,rely = by)
     #label 一个字 0.0166
     termscore5 = Entry(root,width = 7)
-    termscore5.place(relx = 0.25,rely = by)
+    termscore5.place(relx = 0.275,rely = by)
     
     zitermscore5 = Label(root,text = '''学分，GPA计划达到''',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
     zitermscore5.place(relx = 0.31,rely = by)
     
     termgpa5 = Entry(root,width = 7)
-    termgpa5.place(relx = 0.44,rely = by)
+    termgpa5.place(relx = 0.475,rely = by)
     
     by+=0.04
     
     def func():
+        mibyts0 = int(termscore0.get())
+        mibygpa0 = float(termgpa0.get())
         mibyts1 = int(termscore1.get())
-        mibygpa1 = float(termgpa1.get())
+        mibygpa1 = float(termgpa1.get())       
         mibyts2 = int(termscore2.get())
         mibygpa2 = float(termgpa2.get())
         mibyts3 = int(termscore3.get())
@@ -123,13 +117,14 @@ def makeitbyyourself():
         mibyts5 = int(termscore5.get())
         mibygpa5 = float(termgpa5.get())
         allscores = 0
-        allscores = mibyts1+mibyts2+mibyts3+mibyts4+mibyts5
+        allscores = mibyts0+mibyts1+mibyts2+mibyts3+mibyts4+mibyts5
         mibyfinalresultgpa = 0.0
-        mibyfinalresultgpa = float((mibyts1*mibygpa1+mibyts2*mibygpa2+mibyts3*mibygpa3+mibyts4*mibygpa4+mibyts5*mibygpa5)/allscores)
-
+        mibyfinalresultgpa = float((mibyts0*mibygpa0+mibyts1*mibygpa1+mibyts2*mibygpa2+mibyts3*mibygpa3+mibyts4*mibygpa4+mibyts5*mibygpa5)/allscores)
+        #保留两位小数
+        mibyfinalresultgpa = round(mibyfinalresultgpa,2)
         textzuizhongdegpa.insert(END,mibyfinalresultgpa)
     
-    labelzuizhongdegpa = Button(root,command = func(),text = "您最终得到的GPA为：",bg = '#FFFF00',font = ('仿宋',12,'bold'),fg = '#191970')
+    labelzuizhongdegpa = Button(root,command = func,text = "您最终得到的GPA为：",bg = '#FFFF00',font = ('仿宋',12,'bold'),fg = '#191970')
     labelzuizhongdegpa.place(relx = 0.08, rely = by)
     
     textzuizhongdegpa = Text(root)

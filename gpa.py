@@ -109,6 +109,32 @@ def makeitbyyourself():
     termgpa5 = Entry(root,width = 7)
     termgpa5.place(relx = 0.44,rely = by)
     
+    by+=0.04
+    
+    def func():
+        mibyts1 = int(termscore1.get())
+        mibygpa1 = float(termgpa1.get())
+        mibyts2 = int(termscore2.get())
+        mibygpa2 = float(termgpa2.get())
+        mibyts3 = int(termscore3.get())
+        mibygpa3 = float(termgpa3.get())
+        mibyts4 = int(termscore4.get())
+        mibygpa4 = float(termgpa4.get())
+        mibyts5 = int(termscore5.get())
+        mibygpa5 = float(termgpa5.get())
+        allscores = 0
+        allscores = mibyts1+mibyts2+mibyts3+mibyts4+mibyts5
+        mibyfinalresultgpa = 0.0
+        mibyfinalresultgpa = float((mibyts1*mibygpa1+mibyts2*mibygpa2+mibyts3*mibygpa3+mibyts4*mibygpa4+mibyts5*mibygpa5)/allscores)
+
+        textzuizhongdegpa.insert(END,mibyfinalresultgpa)
+    
+    labelzuizhongdegpa = Button(root,command = func(),text = "您最终得到的GPA为：",bg = '#FFFF00',font = ('仿宋',12,'bold'),fg = '#191970')
+    labelzuizhongdegpa.place(relx = 0.08, rely = by)
+    
+    textzuizhongdegpa = Text(root)
+    textzuizhongdegpa.place(relx = 0.23,rely=by,relwidth = 0.05,relheight = 0.035)
+
     
     
 def wegenerateit():

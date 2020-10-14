@@ -133,12 +133,34 @@ def makeitbyyourself():
     
     
 def wegenerateit():
-   
-    by =0.238
     
-    wgicurrgpa = currgpa
-    wgicurrscore = currscore
-    wgileftterms = leftterms
+    by = 0.173
+    qingshurudangqiangpa = Message(root,text = '''请输入：  当前GPA''',bg = '#F0F8FF',font = ('仿宋',12,'bold'),fg = '#000080',width = 500,relief =FLAT)
+    #message没有height
+    qingshurudangqiangpa.place(relx = 0.08,rely = by)
+    
+    dangqiangpa = Entry(root,width = 7)
+    dangqiangpa.place(relx = 0.22,rely = by)
+    #得到当前gpa数值存放在currgpa中
+    currgpa = float(dangqiangpa.get())
+    
+    wenzicurrxuefenshu = Message(root,text = '''现修习学分数\n（0~180的整数）''',bg = '#F0F8FF',font = ('仿宋',12,'bold'),fg = '#000080',width = 500,relief =FLAT)
+    wenzicurrxuefenshu.place(relx = 0.28,rely = by)
+    
+    currxuefenshu = Entry(root,width = 7)
+    currxuefenshu.place(relx = 0.42,rely = by)
+    #得到当前修的学分存放在currscore中
+    currscore =int(currxuefenshu.get())
+    
+    wenzileftterms = Message(root,text = ''' 还剩学期数\n(1~5的整数)''',bg = '#F0F8FF',font = ('仿宋',12,'bold'),fg = '#000080',width = 500,relief =FLAT)
+    wenzileftterms.place(relx = 0.48,rely = by)
+    
+    entryleftterms = Entry(root,width = 7)
+    entryleftterms.place(relx = 0.59,rely = by)
+    #得到还剩的学期数存放在leftterms中
+    leftterms = int(entryleftterms.get())
+
+    by =0.238
     
     daji = Entry(root,width = 7)
     daji.place(relx = 0.1,rely = by)
@@ -148,9 +170,12 @@ def wegenerateit():
     
     mubiaogpa = Entry(root,width = 7)
     mubiaogpa.place(relx = 0.196,rely = by)
-    
+
+    targetgpa = float(mubiaogpa.get())
+    #得到目标GPA存放在targetgpa中
     by+=0.04
     #换行+0.04
+    
     labelxuanzemoshi= Label(root,text = '''选择想要的模式（每学期模式相同噢）''',bg = '#F0F8FF',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
     labelxuanzemoshi.place(relx = 0.08,rely = by)
     
@@ -187,9 +212,6 @@ def wegenerateit():
     
     yingxiuscore = Text(root)
     yingxiuscore.place(relx = 0.465,rely=by,relwidth = 0.05,relheight = 0.04)
-    
-    print(by)
-    
 
 global root
 root = Tk()
@@ -208,34 +230,6 @@ beginningy = 0.06 #y的起始位置
 beginningy+=0.01
 #空隙 0.01
 
-qingshurudangqiangpa = Message(root,text = '''请输入：  当前GPA''',bg = '#F0F8FF',font = ('仿宋',12,'bold'),fg = '#000080',width = 500,relief =FLAT)
-#message没有height
-qingshurudangqiangpa.place(relx = row1minwidth,rely = beginningy)
-
-dangqiangpa = Entry(root,width = 7)
-dangqiangpa.place(relx = 0.17,rely = beginningy)
-'''得到当前gpa数值存放在currgpa中'''
-currgpa = dangqiangpa.get()
-
-wenzicurrxuefenshu = Message(root,text = '''现修习学分数\n（0~180的整数）''',bg = '#F0F8FF',font = ('仿宋',12,'bold'),fg = '#000080',width = 500,relief =FLAT)
-wenzicurrxuefenshu.place(relx = 0.26,rely = beginningy)
-
-currxuefenshu = Entry(root,width = 7)
-currxuefenshu.place(relx = 0.4,rely = beginningy)
-'''得到当前修的学分存放在currscore中'''
-currscore = currxuefenshu.get()
-
-wenzileftterms = Message(root,text = ''' 还剩学期数\n(1~5的整数)''',bg = '#F0F8FF',font = ('仿宋',12,'bold'),fg = '#000080',width = 500,relief =FLAT)
-wenzileftterms.place(relx = 0.47,rely = beginningy)
-
-entryleftterms = Entry(root,width = 7)
-entryleftterms.place(relx = 0.57,rely = beginningy)
-'''得到还剩的学期数存放在leftterms中'''
-leftterms = entryleftterms.get()
-
-beginningy+=0.065
-#两行12号字的message 0.055+0.01
-
 qingxuanzetishi =Label(root,text = ''' 请选择自己制定学习计划然后查看最终GPA或设定目标由我们为您生成学习计划''',font = ('仿宋',14),fg = '#000080',relief =FLAT)
 qingxuanzetishi.place(relx = 0.2,rely = beginningy, relheight = 0.035)
 
@@ -246,6 +240,7 @@ buttonmakeitbyyourself.place(relx = 0.25,rely = beginningy)
 
 buttonwegenerateit = Button(root, text='我们为你生成', command=wegenerateit,bg = '#6495ED',font = ('仿宋',12,'bold'),fg = '#F8F8FF')
 buttonwegenerateit.place(relx = 0.5,rely = beginningy)
+
 
     
 

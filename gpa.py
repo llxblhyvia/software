@@ -153,9 +153,10 @@ def wegenerateit():
     wenzileftterms = Message(root,text = ''' 还剩学期数\n(1~5的整数)''',bg = '#F0F8FF',font = ('仿宋',12,'bold'),fg = '#000080',width = 500,relief =FLAT)
     wenzileftterms.place(relx = 0.48,rely = by)
     
+    var2 = IntVar()
     entryleftterms = Entry(root,width = 7)
     entryleftterms.place(relx = 0.59,rely = by)
-    
+
 
     by =0.22
     
@@ -220,6 +221,9 @@ def wegenerateit():
             else:
                 maxscore = 30
             i = maxscore 
+            if i == 0:
+                s = "！输入违法，请重新输入，学分数不可以为零"
+                otherinfo.insert(END,s)
             while TRUE:
                 x = float((targetgpa*(i*leftterms+currscore)-currtotal)/(i*leftterms))
                 #gpa取两位小数
@@ -240,21 +244,24 @@ def wegenerateit():
             if maxgpa:
                 maxgpa = float(maxgpa)
             else:
-                maxgpa = 4.00
+                maxgpa = 3.80
+                
             i = maxgpa
-            while TRUE:
-                x = (targetgpa*currscore-currtotal)/(leftterms*(i-targetgpa))
-                #将学分数向上取整
-                x = math.ceil(x)
-                if x>30:
-                    s = "很抱歉，无法达到目标GPA"
-                    otherinfo.insert(END,s)
-                    break
-                else:
-                    yingxiuscore.insert(END,i)
-                    yingdadaojidian.insert(END,x)
-                    break
-                i-=0.01
+            
+            if i <= targetgpa:
+                s = "每学期要达到的GPA要高于目标GPA才能达成目标噢~"
+                otherinfo.insert(END,s)
+
+            x = (targetgpa*currscore-currtotal)/(leftterms*(i-targetgpa))
+            
+            #将学分数向上取整
+            x = math.ceil(x)
+            if x>30 or x<0:
+                s = "很抱歉，无法达到目标GPA"
+                otherinfo.insert(END,s)
+            else:
+                yingxiuscore.insert(END,x)
+                yingdadaojidian.insert(END,i)
         
     letsgenerate = Button(root,text = '''生成计划''',command = func2,bg = '#4169E1',font = ('仿宋',12,'bold'),fg = '#F8F8FF')
     letsgenerate.place(relx = 0.08,rely = by)
@@ -275,7 +282,7 @@ def wegenerateit():
     by+=0.05
     
     otherinfo = Text(root,font = ('仿宋',14,'bold'),fg = '#DC143C')
-    otherinfo.place(relx = 0.08,rely=by,relwidth = 0.3,relheight = 0.05)
+    otherinfo.place(relx = 0.08,rely=by,relwidth = 0.5,relheight = 0.2)
     
 global root
 root = Tk()

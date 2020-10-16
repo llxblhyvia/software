@@ -103,7 +103,7 @@ def makeitbyyourself():
     
     by+=0.04
     
-    def func():
+    def func1():
         mibyts0 = int(termscore0.get())
         mibygpa0 = float(termgpa0.get())
         mibyts1 = int(termscore1.get())
@@ -124,7 +124,7 @@ def makeitbyyourself():
         mibyfinalresultgpa = round(mibyfinalresultgpa,2)
         textzuizhongdegpa.insert(END,mibyfinalresultgpa)
     
-    labelzuizhongdegpa = Button(root,command = func,text = "您最终得到的GPA为：",bg = '#FFFF00',font = ('仿宋',12,'bold'),fg = '#191970')
+    labelzuizhongdegpa = Button(root,command = func1,text = "您最终得到的GPA为：",bg = '#FFFF00',font = ('仿宋',12,'bold'),fg = '#191970')
     labelzuizhongdegpa.place(relx = 0.08, rely = by)
     
     textzuizhongdegpa = Text(root)
@@ -141,38 +141,35 @@ def wegenerateit():
     
     dangqiangpa = Entry(root,width = 7)
     dangqiangpa.place(relx = 0.22,rely = by)
+    
     #得到当前gpa数值存放在currgpa中
-    currgpa = float(dangqiangpa.get())
+    currgpa = dangqiangpa.get()
+    if currgpa:
+        currgpa = float(currgpa)
     
     wenzicurrxuefenshu = Message(root,text = '''现修习学分数\n（0~180的整数）''',bg = '#F0F8FF',font = ('仿宋',12,'bold'),fg = '#000080',width = 500,relief =FLAT)
     wenzicurrxuefenshu.place(relx = 0.28,rely = by)
     
     currxuefenshu = Entry(root,width = 7)
     currxuefenshu.place(relx = 0.42,rely = by)
-    #得到当前修的学分存放在currscore中
-    currscore =int(currxuefenshu.get())
+    
     
     wenzileftterms = Message(root,text = ''' 还剩学期数\n(1~5的整数)''',bg = '#F0F8FF',font = ('仿宋',12,'bold'),fg = '#000080',width = 500,relief =FLAT)
     wenzileftterms.place(relx = 0.48,rely = by)
     
     entryleftterms = Entry(root,width = 7)
     entryleftterms.place(relx = 0.59,rely = by)
-    #得到还剩的学期数存放在leftterms中
-    leftterms = int(entryleftterms.get())
-
-    by =0.238
     
-    daji = Entry(root,width = 7)
-    daji.place(relx = 0.1,rely = by)
+
+    by =0.22
     
     shurumubiaogpa= Label(root,text = '''请输入目标GPA:''',bg = '#F0F8FF',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
     shurumubiaogpa.place(relx = 0.08,rely = by)
     
     mubiaogpa = Entry(root,width = 7)
     mubiaogpa.place(relx = 0.196,rely = by)
+    
 
-    targetgpa = float(mubiaogpa.get())
-    #得到目标GPA存放在targetgpa中
     by+=0.04
     #换行+0.04
     
@@ -201,7 +198,23 @@ def wegenerateit():
     
     by+=0.05
     by+=0.05
-    labelyinggaixiuscore= Label(root,text = '''您需要在接下来每学期修''',bg = '#FFFF00',font = ('仿宋',12,'bold'),fg = '#191970',relief =FLAT)
+    
+    
+    #得到当前修的学分存放在currscore中
+    currscore =currxuefenshu.get()
+    if currscore:
+        currscore = int(currscore)
+    #得到还剩的学期数存放在leftterms中
+    leftterms = entryleftterms.get()
+    if leftterms:
+        leftterms = int(leftterms)
+    #得到目标GPA存放在targetgpa中
+    targetgpa = mubiaogpa.get()
+    if targetgpa:
+        targetgpa = float(targetgpa)
+        
+    
+    labelyinggaixiuscore= Button(root,text = '''您需要在接下来每学期修''',bg = '#FFFF00',font = ('仿宋',12,'bold'),fg = '#191970',relief =FLAT)
     labelyinggaixiuscore.place(relx = 0.08,rely = by)
     
     yingxiuscore = Text(root)
@@ -240,8 +253,5 @@ buttonmakeitbyyourself.place(relx = 0.25,rely = beginningy)
 
 buttonwegenerateit = Button(root, text='我们为你生成', command=wegenerateit,bg = '#6495ED',font = ('仿宋',12,'bold'),fg = '#F8F8FF')
 buttonwegenerateit.place(relx = 0.5,rely = beginningy)
-
-
-    
 
 root.mainloop()

@@ -6,6 +6,7 @@ Created on Sun Oct 11 11:26:51 2020
 """
 
 from tkinter import *
+import math
 
 def makeitbyyourself():
     by =0.238
@@ -142,11 +143,6 @@ def wegenerateit():
     dangqiangpa = Entry(root,width = 7)
     dangqiangpa.place(relx = 0.22,rely = by)
     
-    #得到当前gpa数值存放在currgpa中
-    currgpa = dangqiangpa.get()
-    if currgpa:
-        currgpa = float(currgpa)
-    
     wenzicurrxuefenshu = Message(root,text = '''现修习学分数\n（0~180的整数）''',bg = '#F0F8FF',font = ('仿宋',12,'bold'),fg = '#000080',width = 500,relief =FLAT)
     wenzicurrxuefenshu.place(relx = 0.28,rely = by)
     
@@ -176,18 +172,13 @@ def wegenerateit():
     labelxuanzemoshi= Label(root,text = '''选择想要的模式（每学期模式相同噢）''',bg = '#F0F8FF',font = ('仿宋',12,'bold'),fg = '#000080',relief =FLAT)
     labelxuanzemoshi.place(relx = 0.08,rely = by)
     
-    def model():
-      dic = {0:'甲',1:'乙',2:'丙'}
-      s = "您选了" + dic.get(var.get()) + "项"
-      lb.config(text = s)
-    
     by+=0.04
     
     var = IntVar()
-    rabuttonmucheasy = Radiobutton(root,text="愿意修大量甚至溢出学分，每学期绩点要求稍低（默认每学期修30分）   能接受每学期学的最高分数为",fg = '#191970',variable=var,value=0,command=model)
+    rabuttonmucheasy = Radiobutton(root,text="愿意修大量甚至溢出学分，每学期绩点要求稍低（默认每学期修30分）   能接受每学期学的最高分数为",fg = '#191970',variable=var,value=0)
     rabuttonmucheasy.place(relx = 0.08,rely = by)
 
-    rabuttonlittlehard = Radiobutton(root,text="愿意接受每学期达到较高绩点，选修课程数较少（默认每学期绩点达到3.8）   能接收每学期应达到的最高绩点为",fg = '#191970',variable=var,value=1,command=model)
+    rabuttonlittlehard = Radiobutton(root,text="愿意接受每学期达到较高绩点，选修课程数较少（默认每学期绩点达到3.8）   能接收每学期应达到的最高绩点为",fg = '#191970',variable=var,value=1)
     rabuttonlittlehard.place(relx = 0.08,rely = by+0.05)
     
     zuigaofenshu = Entry(root,width = 7)
@@ -198,23 +189,78 @@ def wegenerateit():
     
     by+=0.05
     by+=0.05
-    
-    
-    #得到当前修的学分存放在currscore中
-    currscore =currxuefenshu.get()
-    if currscore:
-        currscore = int(currscore)
-    #得到还剩的学期数存放在leftterms中
-    leftterms = entryleftterms.get()
-    if leftterms:
-        leftterms = int(leftterms)
-    #得到目标GPA存放在targetgpa中
-    targetgpa = mubiaogpa.get()
-    if targetgpa:
-        targetgpa = float(targetgpa)
         
+    def func2():
+        choice = var.get()
+        #得到当前gpa数值存放在currgpa中
+        currgpa = dangqiangpa.get()
+        if currgpa:
+            currgpa = float(currgpa)
+        #得到当前修的学分存放在currscore中
+        currscore =currxuefenshu.get()
+        if currscore:
+            currscore = int(currscore)
+        #求目前学分数×GPA
+        currtotal = float(currscore*currgpa)
+
+        #得到还剩的学期数存放在leftterms中
+        leftterms = entryleftterms.get()
+        if leftterms:
+            leftterms = int(leftterms)
+        #得到目标GPA存放在targetgpa中
+        targetgpa = mubiaogpa.get()
+        if targetgpa:
+            targetgpa = float(targetgpa)
+        
+        if choice == 0:
+            #能接受的最多分数
+            maxscore = zuigaofenshu.get()
+            if maxscore:
+                maxscore = int(maxscore)
+            else:
+                maxscore = 30
+            i = maxscore 
+            while TRUE:
+                x = float((targetgpa*(i*leftterms+currscore)-currtotal)/(i*leftterms))
+                #gpa取两位小数
+                x = round(x,2)
+                if x>4.00:
+                    s = "很抱歉，无法达到目标GPA"
+                    otherinfo.insert(END,s)
+                    break
+                else:
+                    yingxiuscore.insert(END,i)
+                    yingdadaojidian.insert(END,x)
+                    break
+                --i
+                
+        if choice == 1:
+            #能接受的最高绩点
+            maxgpa = zuigaojidian.get()
+            if maxgpa:
+                maxgpa = float(maxgpa)
+            else:
+                maxgpa = 4.00
+            i = maxgpa
+            while TRUE:
+                x = (targetgpa*currscore-currtotal)/(leftterms*(i-targetgpa))
+                #将学分数向上取整
+                x = math.ceil(x)
+                if x>30:
+                    s = "很抱歉，无法达到目标GPA"
+                    otherinfo.insert(END,s)
+                    break
+                else:
+                    yingxiuscore.insert(END,i)
+                    yingdadaojidian.insert(END,x)
+                    break
+                i-=0.01
+        
+    letsgenerate = Button(root,text = '''生成计划''',command = func2,bg = '#4169E1',font = ('仿宋',12,'bold'),fg = '#F8F8FF')
+    letsgenerate.place(relx = 0.08,rely = by)
+    by+=0.05
     
-    labelyinggaixiuscore= Button(root,text = '''您需要在接下来每学期修''',bg = '#FFFF00',font = ('仿宋',12,'bold'),fg = '#191970',relief =FLAT)
+    labelyinggaixiuscore= Label(root,text = '''您需要在接下来每学期修''',bg = '#FFFF00',font = ('仿宋',12,'bold'),fg = '#191970',relief =FLAT)
     labelyinggaixiuscore.place(relx = 0.08,rely = by)
     
     yingxiuscore = Text(root)
@@ -223,9 +269,14 @@ def wegenerateit():
     labelyinggaidadaodejidian= Label(root,text = '''学分，每学期绩点应达到''',bg = '#FFFF00',font = ('仿宋',12,'bold'),fg = '#191970',relief =FLAT)
     labelyinggaidadaodejidian.place(relx = 0.3,rely = by)
     
-    yingxiuscore = Text(root)
-    yingxiuscore.place(relx = 0.465,rely=by,relwidth = 0.05,relheight = 0.04)
-
+    yingdadaojidian = Text(root)
+    yingdadaojidian.place(relx = 0.465,rely=by,relwidth = 0.05,relheight = 0.04)
+    
+    by+=0.05
+    
+    otherinfo = Text(root,font = ('仿宋',14,'bold'),fg = '#DC143C')
+    otherinfo.place(relx = 0.08,rely=by,relwidth = 0.3,relheight = 0.05)
+    
 global root
 root = Tk()
 root.title('gpa提升计算器')

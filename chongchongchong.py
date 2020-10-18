@@ -31,7 +31,8 @@ def resize(w, h, w_box, h_box, pil_image):
 def gpa():
     root = Toplevel()
     root.title('gpa提升计算器')
-    root.geometry('200x300')
+    root.minsize(400, 600)    
+    root.resizable(0, 0) 
 
     def makeitbyyourself():
         by =0.2
@@ -350,28 +351,26 @@ def gpa():
 def fundamentalcal():
     root = Toplevel()
     root.title("计算器")
-    root.resizable(0, 0)
+    root.minsize(400, 600)      # 窗口大小400*600
+    root.resizable(0, 0) 
     
     def get_input(entry, argu):
         entry.insert(END, argu)
 
-
+        
+        
     def backspace(entry):
         input_len = len(entry.get())
         entry.delete(input_len - 1)
 
-
     def clear(entry):
         entry.delete(0, END)
-
 
     def calc(entry):
         input = entry.get()
         output = str(eval(input.strip()))
         clear(entry)
         entry.insert(END, output)
-
-
 
     def sin_an(entry):    #num为角度
         input = entry.get()
@@ -381,7 +380,6 @@ def fundamentalcal():
         clear(entry)
         entry.insert(END, a)
 
-
     def sin_rad(entry):    #num为弧度
         input = entry.get()
         num = float(input.strip())
@@ -389,6 +387,14 @@ def fundamentalcal():
         a = round(temp,4)
         clear(entry)
         entry.insert(END, a)
+        
+    def log_a(entry):
+        input = entry.get()
+        num = float(input.strip())
+        temp = math.log(num,math.e)
+        a = round(temp,10)
+        clear(entry)
+        entry.insert(END,a)
 
     def cos_an(entry):    #num为角度
         input = entry.get()
@@ -421,106 +427,338 @@ def fundamentalcal():
         a = round(temp,4)
         clear(entry)
         entry.insert(END, a)
+    
+ 
+        
 
-    entry_font = tkinter.font.Font(size=12)
+    entry_font = tkinter.font.Font(size=30)
     entry = Entry(root, justify="right", font=entry_font)
-    entry.grid(row=0, column=0, columnspan=4, sticky=N+W+S+E, padx=5,  pady=5)
+    entry.place(x=0, y=0, width=400, height=110)
 
-    button_font = tkinter.font.Font(size=10, weight=tkinter.font.BOLD)
-    button_bg = '#D5E0EE'
-    button_active_bg = '#E5E35B'
+    button_font = tkinter.font.Font(size=18, weight=tkinter.font.BOLD)
 
-    myButton = partial(Button, root, bg=button_bg, padx=10, pady=3, activebackground = button_active_bg)
+    # 1
+    a = 0
+    b = 110
+    button13 = Button(root,text='.', command=lambda: get_input(entry, '.'),font=(13),bg = '#FFEBCD',relief =FLAT)
+    button13.place(x=a, y=b, width=100, height=70)
 
-    button7 = myButton(text='7', command=lambda: get_input(entry, '7'))
-    button7.grid(row=1, column=0, pady=5)
+    button15 = Button(root, text='退格', bg='#FFEBCD',font=(13),command=lambda: backspace(entry),relief =FLAT)
+    button15.place(x=a+100, y=b, width=100, height=70)
 
-    button8 = myButton(text='8', command=lambda: get_input(entry, '8'))
-    button8.grid(row=1, column=1, pady=5)
+    button16 = Button(root, text='C', bg='#FFEBCD',font=(13),command=lambda : clear(entry),relief =FLAT)
+    button16.place(x=a+200, y=b, width=100, height=70)
 
-    button9 = myButton(text='9', command=lambda: get_input(entry, '9'))
-    button9.grid(row=1, column=2, pady=5)
-
-    button10 = myButton(text='+', command=lambda: get_input(entry, '+'))
-    button10.grid(row=1, column=3, pady=5)
-
-    button4 = myButton(text='4', command=lambda: get_input(entry, '4'))
-    button4.grid(row=2, column=0, pady=5)
-
-    button5 = myButton(text='5', command=lambda: get_input(entry, '5'))
-    button5.grid(row=2, column=1, pady=5)
-
-    button6 = myButton(text='6', command=lambda: get_input(entry, '6'))
-    button6.grid(row=2, column=2, pady=5)
-
-    button11 = myButton(text='-', command=lambda: get_input(entry, '-'))
-    button11.grid(row=2, column=3, pady=5)
-
-    button1 = myButton(text='1', command=lambda: get_input(entry, '1'))
-    button1.grid(row=3, column=0, pady=5)
-
-    button2 = myButton(text='2', command=lambda: get_input(entry, '2'))
-    button2.grid(row=3, column=1, pady=5)
-
-    button3 = myButton(text='3', command=lambda: get_input(entry, '3'))
-    button3.grid(row=3, column=2, pady=5)
-
-    button12 = myButton(text='*', command=lambda: get_input(entry, '*'))
-    button12.grid(row=3, column=3, pady=5)
-
-    button0 = myButton(text='0', command=lambda: get_input(entry, '0'))
-    button0.grid(row=4, column=0, columnspan=2, padx=3, pady=5, sticky=N+S+E+W)
-
-    button13 = myButton(text='.', command=lambda: get_input(entry, '.'))
-    button13.grid(row=4, column=2, pady=5)
-
-    button14 = Button(root, text='/', bg=button_bg, padx=10, pady=3,
-                      command=lambda: get_input(entry, '/'))
-    button14.grid(row=4, column=3, pady=5)
-
-    button15 = Button(root, text='<-', bg=button_bg, padx=10, pady=3,
-                      command=lambda: backspace(entry), activebackground=button_active_bg)
-    button15.grid(row=5, column=0, pady=5)
-
-    button16 = Button(root, text='C', bg=button_bg, padx=10, pady=3,
-                      command=lambda : clear(entry), activebackground=button_active_bg)
-    button16.grid(row=5, column=1, pady=5)
-
-    button17 = Button(root, text='=', bg=button_bg, padx=10, pady=3,
-                      command=lambda: calc(entry), activebackground=button_active_bg)
-    button17.grid(row=5, column=2, columnspan=2, padx=3, pady=5, sticky=N+S+E+W)
-
-    button18 = Button(root, text='sin', bg=button_bg, padx=10, pady=3,
-                      command=lambda : sin_an(entry), activebackground=button_active_bg)
-    button18.grid(row=1, column=4, pady=5)
+    button10 = Button(root,text='+', bg='#FFEBCD',font=(13),command=lambda: get_input(entry, '+'),relief =FLAT)
+    button10.place(x=a+300, y=b, width=100, height=70)
     
-    button19 = Button(root, text='sinh', bg=button_bg, padx=10, pady=3,
-                      command=lambda : sin_rad(entry), activebackground=button_active_bg)
-    button19.grid(row=1, column=5, pady=5)
     
-    button20 = Button(root, text='cos', bg=button_bg, padx=10, pady=3,
-                      command=lambda : cos_an(entry), activebackground=button_active_bg)
-    button20.grid(row=2, column=4, pady=5)
+    # 2
+    a = 0
+    b+=70
+    button7 = Button(root,text='7', bg = '#FFDEAD',font=(13),command=lambda: get_input(entry, '7'),relief =FLAT)
+    button7.place(x=a, y=b, width=100, height=70)
+
+    button8 = Button(root,text='8', bg = '#FFDEAD',font=(13),command=lambda: get_input(entry, '8'),relief =FLAT)
+    button8.place(x=a+100, y=b, width=100, height=70)
     
-    button21 = Button(root, text='cosh', bg=button_bg, padx=10, pady=3,
-                      command=lambda : cos_rad(entry), activebackground=button_active_bg)
-    button21.grid(row=2, column=5, pady=5)
+    button9 = Button(root,text='9', bg = '#FFDEAD',font=(13),command=lambda: get_input(entry, '9'),relief =FLAT)
+    button9.place(x=a+200, y=b, width=100, height=70)
     
-    button22 = Button(root, text='tan', bg=button_bg, padx=10, pady=3,
-                      command=lambda : tan_an(entry), activebackground=button_active_bg)
-    button22.grid(row=3, column=4, pady=5)
+    button11 =Button(root,text='-', bg = '#FFDEAD',font=(13), command=lambda: get_input(entry, '-'),relief =FLAT)
+    button11.place(x=a+300, y=b, width=100, height=70)
     
-    button23 = Button(root, text='tanh', bg=button_bg, padx=10, pady=3,
-                      command=lambda : tan_rad(entry), activebackground=button_active_bg)
-    button23.grid(row=3, column=5, pady=5)
     
-    button12 = myButton(text='指数', command=lambda: get_input(entry, '**'))
-    button12.grid(row=4, column=4, pady=5)
+    # 3
+    a = 0
+    b+=70
+    button4 = Button(root,text='4',bg = '#F4A460', font=(13),command=lambda: get_input(entry, '4'),relief =FLAT)
+    button4.place(x=a, y=b, width=100, height=70)
+
+    button5 = Button(root,text='5', bg = '#F4A460',font=(13),command=lambda: get_input(entry, '5'),relief =FLAT)
+    button5.place(x=a+100, y=b, width=100, height=70)
+
+    button6 = Button(root,text='6',bg = '#F4A460', font=(13),command=lambda: get_input(entry, '6'),relief =FLAT)
+    button6.place(x=a+200, y=b, width=100, height=70)
     
-    button23 = Button(root, text='对数', bg=button_bg, padx=10, pady=3,
-                      command=lambda : log(entry), activebackground=button_active_bg)
-    button23.grid(row=4, column=5, pady=5)
+    button12 = Button(root,text='*', bg = '#F4A460',font=(13),command=lambda: get_input(entry, '*'),relief =FLAT)
+    button12.place(x=a+300, y=b, width=100, height=70)
     
+    
+    #4
+    a = 0
+    b+=70
+    button1 = Button(root,text='1', bg = '#FFA500',font=(13),command=lambda: get_input(entry, '1'),relief =FLAT)
+    button1.place(x=a, y=b, width=100, height=70)
+
+    button2 = Button(root,text='2', bg = '#FFA500',font=(13),command=lambda: get_input(entry, '2'),relief =FLAT)
+    button2.place(x=a+100, y=b, width=100, height=70)
+
+    button3 = Button(root,text='3', bg = '#FFA500', font=(13),command=lambda: get_input(entry, '3'),relief =FLAT)
+    button3.place(x=a+200, y=b, width=100, height=70)
+
+    button14 = Button(root, text='/', bg='#FFA500',font=(13),command=lambda: get_input(entry, '/'),relief =FLAT)
+    button14.place(x=a+300, y=b, width=100, height=70)
+    
+    def help():
+        root2 = Toplevel()
+        root2.title("帮助")
+        root2.minsize(400,20)
+        helpimage = Text(root2,font = ('微软雅黑',12))
+        w = '指数功能：\n请先输入底数再点击指数再在后面输入指数\nln功能：\n请先输入真数再点击ln键\nsin cos tan等六个三角函数功能：\n请先输入弧度或角度再点击计算器相应按键'
+        helpimage.insert(END,w)
+        helpimage.place(relx = 0,rely = 0)
+        btClose=Button(root2,text='返回计算器主界面',command=root2.destroy)
+        btClose.place(relx=0.7,rely=0.7)
+        
+    #5
+    a = 0
+    b+=70
+    button0 = Button(root,text='0',bg='#FF8C00', font=(13),command=lambda: get_input(entry, '0'),relief =FLAT)
+    button0.place(x=a, y=b, width=100, height=70)
+
+    button17 = Button(root, text='=', bg='#FF8C00',font=(13),command=lambda: calc(entry),relief =FLAT)
+    button17.place(x=a+100, y=b, width=100, height=70)
+    
+    button25 = Button(root, text='帮助', bg='#FF8C00',font=(13),command=help,relief =FLAT)
+    button25.place(x=a+200, y=b, width=200, height=70)
+    
+    #6
+    a = 0
+    b+=70
+    button18 = Button(root, text='sin\n(角度制)', bg='#CD853F',font=(13),command=lambda : sin_an(entry),relief =FLAT)
+    button18.place(x=a, y=b, width=100, height=70)
+    
+    button20 = Button(root, text='cos\n(角度制)', bg='#CD853F',font=(13),command=lambda : cos_an(entry),relief =FLAT)
+    button20.place(x=a+100, y=b, width=100, height=70)
+    
+    button22 = Button(root, text='tan\n(角度制)', bg='#CD853F',font=(13),command=lambda : tan_an(entry),relief =FLAT)
+    button22.place(x=a+200, y=b, width=100, height=70)
+
+    button12 = Button(root,text='指数', bg='#CD853F',font=(13),command=lambda: get_input(entry, '**'),relief =FLAT)
+    button12.place(x=a+300, y=b, width=100, height=70)
+    
+    #7
+    a = 0
+    b+=70
+    button19 = Button(root, text='sin\n(弧度制)', bg= '#8B4513',font=(13),command=lambda : sin_rad(entry),relief =FLAT)
+    button19.place(x=a, y=b, width=100, height=70)
+
+    button21 = Button(root, text='cos\n(弧度制)', bg= '#8B4513',font=(13),command=lambda : cos_rad(entry),relief =FLAT)
+    button21.place(x=a+100, y=b, width=100, height=70)
+
+    button23 = Button(root, text='tan\n(弧度制)', bg= '#8B4513',font=(13),command=lambda : tan_rad(entry),relief =FLAT)
+    button23.place(x=a+200, y=b, width=100, height=70)
+
+        
+    button24 = Button(root, text='ln', bg= '#8B4513',font=(13),command=lambda: log_a(entry),relief =FLAT)
+    button24.place(x=a+300, y=b, width=100, height=70)
+    
+def fin():
+    root4 = Toplevel()
+    root4.title('金融计算器')
+    root4.minsize(220,300)
+
+
+    def fin1():
+        root41 = Toplevel()
+        root41.title('求将来资金总值')
+        frame = Frame(root41)
+
+        Label(root41, text = '参数名称').grid(row = 0, column = 0)
+        Label(root41, text = '值').grid(row = 0, column = 1)
+        Label(root41, text = 'rate利率(小数)').grid(row = 1, column = 0)
+        Label(root41, text = 'nper年数').grid(row = 2, column = 0)
+        Label(root41, text = 'pmt月供').grid(row = 3, column = 0)
+        Label(root41, text = 'pv现在资金总额').grid(row = 4, column = 0)
+
+        e1 = Entry(root41)
+        e2 = Entry(root41)
+        e3 = Entry(root41)
+        e4 = Entry(root41)
+        e1.grid(row=1, column=1, padx=10, pady=5)
+        e2.grid(row=2, column=1, padx=10, pady=5)
+        e3.grid(row=3, column=1, padx=10, pady=5)
+        e4.grid(row=4, column=1, padx=10, pady=5)
+        v1 = StringVar()
+        e5 = Entry(root41, width=10, textvariable=v1, state='readonly').grid(row=5, column=1)
+
+        def Future_Value():    #利率可以是数值or矩阵
+            a = np.fv(eval(e1.get()), eval(e2.get()), eval(e3.get()), eval(e4.get()))
+            a = 0 - a
+            v1.set(a)
+
+        Button(root41, text='将来资金总值', width=10, command = Future_Value).grid(row=5, column=0, sticky=W, padx=10, pady=5)
+
+    def fin2():
+        root42 = Toplevel()
+        root42.title('求现在需投资资金总额')
+        frame = Frame(root42)
+
+        Label(root42, text = '参数名称').grid(row = 0, column = 0)
+        Label(root42, text = '值').grid(row = 0, column = 1)
+        Label(root42, text = 'rate利率(小数)').grid(row = 1, column = 0)
+        Label(root42, text = 'nper年数').grid(row = 2, column = 0)
+        Label(root42, text = 'pmt月供').grid(row = 3, column = 0)
+        Label(root42, text = 'fv期望资金总额').grid(row = 4, column = 0)
+
+        e1 = Entry(root42)
+        e2 = Entry(root42)
+        e3 = Entry(root42)
+        e4 = Entry(root42)
+        e1.grid(row=1, column=1, padx=10, pady=5)
+        e2.grid(row=2, column=1, padx=10, pady=5)
+        e3.grid(row=3, column=1, padx=10, pady=5)
+        e4.grid(row=4, column=1, padx=10, pady=5)
+        v1 = StringVar()
+        e5 = Entry(root42, width=10, textvariable=v1, state='readonly').grid(row=5, column=1)
+
+        def Present_Value():
+            a = np.pv(eval(e1.get()), eval(e2.get()), eval(e3.get()), eval(e4.get()))
+            a = 0 - a
+            v1.set(a)
+
+        Button(root42, text='求现在需投资资金总额', width=10, command = Present_Value).grid(row=5, column=0, sticky=W, padx=10, pady=5)
+
+    def fin3():
+        root43 = Toplevel()
+        root43.title('求每月利润')
+        frame = Frame(root43)
+
+        Label(root43, text = '参数名称').grid(row = 0, column = 0)
+        Label(root43, text = '值').grid(row = 0, column = 1)
+        Label(root43, text = 'rate利率(小数)').grid(row = 1, column = 0)
+        Label(root43, text = 'nper年数').grid(row = 2, column = 0)
+        Label(root43, text = 'pv现在资金总额').grid(row = 4, column = 0)
+
+        e1 = Entry(root43)
+        e2 = Entry(root43)
+        e3 = Entry(root43)
+        e1.grid(row=1, column=1, padx=10, pady=5)
+        e2.grid(row=2, column=1, padx=10, pady=5)
+        e3.grid(row=3, column=1, padx=10, pady=5)
+        v1 = StringVar()
+        e5 = Entry(root43, width=10, textvariable=v1, state='readonly').grid(row=5, column=1)
+
+        def Payment():
+            a = np.pmt(eval(e1.get()), eval(e2.get()), eval(e3.get()))
+            a = 0 - a
+            v1.set(a)
+
+        Button(root43, text='每月利润', width=10, command = Payment).grid(row=5, column=0, sticky=W, padx=10, pady=5)
+
+
+    def fin45():
+        root445 = Toplevel()
+        root445.title('求月供本金、利息')
+        frame = Frame(root445)
+
+        Label(root445, text = '参数名称').grid(row = 0, column = 0)
+        Label(root445, text = '值').grid(row = 0, column = 1)
+        Label(root445, text = 'rate欠款利率(小数)').grid(row = 1, column = 0)
+        Label(root445, text = 'nper总期数').grid(row = 2, column = 0)
+        Label(root445, text = 'pv现在欠款总额').grid(row = 3, column = 0)
+        Label(root445, text = 'per第n个偿还期').grid(row = 4, column = 0)
+
+        e1 = Entry(root445)
+        e2 = Entry(root445)
+        e3 = Entry(root445)
+        e4 = Entry(root445)
+        e1.grid(row=1, column=1, padx=10, pady=5)
+        e2.grid(row=2, column=1, padx=10, pady=5)
+        e3.grid(row=3, column=1, padx=10, pady=5)
+        e4.grid(row=4, column=1, padx=10, pady=5)
+
+        v1 = StringVar()
+        e5 = Entry(root445, width=10, textvariable=v1, state='readonly').grid(row=5, column=1)
+
+        v2 = StringVar()
+        e6 = Entry(root445, width=10, textvariable=v2, state='readonly').grid(row=6, column=1)
+
+
+        def Payment_Principal():    #求月供中的本金,per表示在第几个偿还期
+            a = np.ppmt(eval(e1.get()), eval(e2.get()), eval(e3.get()), eval(e4.get()))
+            a = 0 - a
+            v1.set(a)
+
+        def Payment_Interest():     #要求同上
+            a = np.ipmt(eval(e1.get()), eval(e2.get()), eval(e3.get()), eval(e4.get()))
+            a = 0 - a
+            v2.set(a)
+
+        Button(root445, text='求月供本金', width=10, command = Payment_Principal).grid(row=5, column=0, sticky=W, padx=10, pady=5)
+        Button(root445, text='求月供利息', width=10, command = Payment_Interest).grid(row=6, column=0, sticky=W, padx=10, pady=5)    
+
+
+    def fin67():
+        root467 = Toplevel()
+        root467.title('求净现值、内部回报率')
+        frame = Frame(root467)
+
+        Label(root467, text = '参数名称').grid(row = 0, column = 0)
+        Label(root467, text = '值').grid(row = 0, column = 1)
+        Label(root467, text = 'rate利率(小数)').grid(row = 1, column = 0)
+        Label(root467, text = '每日现金(输入一组数)').grid(row = 2, column = 0)
+
+        e1 = Entry(root467)
+        e2 = Entry(root467)
+        e1.grid(row=1, column=1, padx=10, pady=5)
+        e2.grid(row=2, column=1, padx=10, pady=5)
+
+        v1 = StringVar()
+        e5 = Entry(root467, width=10, textvariable=v1, state='readonly').grid(row=5, column=1)
+
+        v2 = StringVar()
+        e6 = Entry(root467, width=10, textvariable=v2, state='readonly').grid(row=6, column=1)
+
+        def Net_pv():    #values是一个array
+            a = np.npv(eval(e1.get()), eval(e2.get()))
+            v1.set(a)
+
+        def Internal_Rate_Return():    #要求同上
+            a = np.irr(eval(e2.get()))
+            v2.set(a)                                                                           
+
+
+        Button(root467, text='求净现值', width=10, command = Net_pv).grid(row=5, column=0, sticky=W, padx=10, pady=5)
+        Button(root467, text='求内部回报率', width=10, command = Internal_Rate_Return).grid(row=6, column=0, sticky=W, padx=10, pady=5)    
+
+    def fin8():
+        root48 = Toplevel()
+        root48.title('求偿还年数')
+        frame = Frame(root48)
+
+        Label(root48, text = '参数名称').grid(row = 0, column = 0)
+        Label(root48, text = '值').grid(row = 0, column = 1)
+        Label(root48, text = 'rate利率(小数)').grid(row = 1, column = 0)
+        Label(root48, text = 'pmt月供').grid(row = 2, column = 0)
+        Label(root48, text = 'pv现在欠款总额').grid(row = 3, column = 0)
+
+        e1 = Entry(root48)
+        e2 = Entry(root48)
+        e3 = Entry(root48)
+        e1.grid(row=1, column=1, padx=10, pady=5)
+        e2.grid(row=2, column=1, padx=10, pady=5)
+        e3.grid(row=3, column=1, padx=10, pady=5)
+        v1 = StringVar()
+        e5 = Entry(root48, width=10, textvariable=v1, state='readonly').grid(row=5, column=1)
+
+        def Year_nper():
+            a = np.nper(float(e1.get())), eval(e2.get()), eval(e3.get())
+            a = int(a) + 1
+            v1.set(a)
+
+        Button(root48, text='求偿还年数', width=10, command = Year_nper).grid(row=5, column=0, sticky=W, padx=10, pady=5)
+
+
+    
+    Button1 = Button(root4, text='将来资金总值', bg = '#FFE4E1',font=('宋体',12),command = fin1,relief =FLAT).place(x=0,y=0,width=110,height=100)
+    Button2 = Button(root4, text='现在需投资\n资金总额',  bg = '#FFE4E1',font=('宋体',12),command = fin2,relief =FLAT).place(x=110,y=0,width=110,height=100)
+    Button3 = Button(root4, text='每月利润', bg = '#F08080', font=('宋体',12),command = fin3,relief =FLAT).place(x=0,y=100,width=110,height=100)
+    Button4 = Button(root4, text='月供本金、\n利息', bg = '#F08080',font=('宋体',12),command = fin45,relief =FLAT).place(x=110,y=100,width=110,height=100)    
+    Button5 = Button(root4, text='净现值、\n内部回报率',bg = '#FA8072',font=('宋体',12), command = fin67,relief =FLAT).place(x=0,y=200,width=110,height=100)    
+    Button6 = Button(root4, text='偿还年数', bg = '#FA8072',font=('宋体',12),command = fin8,relief =FLAT).place(x=110,y=200,width=110,height=100)      
+
 wd = Tk()
 wd.title('冲冲冲计算器')
 wd.geometry('900x480')
@@ -548,7 +786,7 @@ bigtitle.place(relx = 0.08,rely = 0,relwidth = 0.84)
 w_box2 = 200
 h_box2 = 300
 
-fund_pil_image = Image.open(r'C:/Users/Administrator/Desktop/calculator/daffa.png')  
+fund_pil_image = Image.open(r'C:/Users/Administrator/Desktop/calculator/fundamentalcal.png')  
  
 fund_w, fund_h =fund_pil_image.size  
 
@@ -564,14 +802,31 @@ gpa_pil_image_resized = resize(gpa_w, gpa_h, w_box2, h_box2, gpa_pil_image)
 
 gpa_tk_image = ImageTk.PhotoImage(gpa_pil_image_resized)  
 
+fin_pil_image = Image.open(r'C:/Users/Administrator/Desktop/calculator/fin.png')  
+ 
+fin_w, fin_h =fin_pil_image.size  
+
+fin_pil_image_resized = resize(fin_w, fin_h, w_box2, h_box2, fin_pil_image)  
+
+fin_tk_image = ImageTk.PhotoImage(fin_pil_image_resized)  
+
 bigtitle = Label(wd,image=tk_image, width=w_box, height=h_box)
 bigtitle.place(relx = 0.08,rely = 0,relwidth = 0.84)
 Button_fundamentalcal = Button(wd, image = fund_tk_image , width=w_box2, height = h_box2, command = fundamentalcal)
 Button_fundamentalcal.place(x = 20,y = 110)
 Button_gpa = Button(wd, image = gpa_tk_image , width=w_box2, height = h_box2, command = gpa)
-Button_gpa.place(x = 240,y=110)
+Button_gpa.place(x = 245,y=110)
+Button_fin = Button(wd, image = fin_tk_image , width=w_box2, height = h_box2, command = fin)
+Button_fin.place(x = 470,y=110)
 
+label_funda = Label(wd,text = '基本计算器',font = ('仿宋',14,'bold'))
+label_funda.place(x = 20,y = 430,relwidth = 0.2,relheight = 0.05)
 
+label_funda = Label(wd,text = 'GPA提升神器',font = ('仿宋',14,'bold'))
+label_funda.place(x = 245,y = 430,relwidth = 0.2,relheight = 0.05)
+
+label_funda = Label(wd,text = '金融计算器',font = ('仿宋',14,'bold'))
+label_funda.place(x = 480,y = 430,relwidth = 0.2,relheight = 0.05)
 
 
 mainloop()
